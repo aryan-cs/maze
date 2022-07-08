@@ -14,7 +14,7 @@ window.addEventListener("resize", function (ignored) {
 
 // site
 var title = "maze generator & solver";
-var version = "version 1.0.4";
+var version = "version 1.1.1";
 
 window.onload = function () { document.title = title; document.getElementById("title").innerHTML = title + "  <span style=\"font-size: 30px;\"> " + version + "<\span>"; }
 
@@ -54,9 +54,11 @@ function createCornerButton (buttonText) {
   var button = document.createElement("button");
   button.className = "corner_button";
   button.textContent = buttonText;
-  button.addEventListener("click", cornerButtonClicked());
+  button.id = "corner_button";
 
   document.getElementById("main").appendChild(button);
+
+  document.getElementById("corner_button").onclick = function (event) { cornerButtonClicked(); }
 
   return button;
 
@@ -74,6 +76,28 @@ function inputButtonClicked () {
 function cornerButtonClicked () {
 
   // start here...
+
+  maze = new Grid();
+  next;
+  stack = [];
+  path = [];
+  finished = false;
+
+  maze.rows = floor(HEIGHT / CELL_SIZE);
+  maze.columns = floor(WIDTH / CELL_SIZE);
+
+  maze.populate();
+
+  current = maze.data[0];
+  start = current;
+  start.visited = true;
+  end = maze.data[maze.data.length - 1];
+
+  loop();
+
+}
+
+function mouseClicked () {
 
 }
 

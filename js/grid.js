@@ -6,7 +6,12 @@ function Grid () {
 
 }
 
-Grid.prototype.display = function () { this.data.forEach(function (cell) { cell.show(); }); }
+Grid.prototype.display = function (stack, finished) {
+    
+    stack.forEach(function (cell, index) { cell.connect(stack[index - 1]); });
+    this.data.forEach(function (cell) { cell.show(finished); });
+
+}
 
 Grid.prototype.populate = function () {
 
@@ -33,5 +38,11 @@ Grid.prototype.removeWalls = function (current, next) {
     else if (verticalDifference   === -1) { current.walls[WALLS.BOTTOM] = false; next.walls[WALLS.TOP]    = false; }
 
     current.visited = true;
+
+}
+
+Grid.prototype.resetVisits = function () {
+
+    this.data.forEach(function (cell) { cell.visited = false; });
 
 }
