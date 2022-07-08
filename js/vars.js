@@ -14,7 +14,7 @@ window.addEventListener("resize", function (ignored) {
 
 // site
 var title = "maze generator & solver";
-var version = "version 1.0.0";
+var version = "version 1.0.4";
 
 window.onload = function () { document.title = title; document.getElementById("title").innerHTML = title + "  <span style=\"font-size: 30px;\"> " + version + "<\span>"; }
 
@@ -83,12 +83,12 @@ const ACCENT_1 = getComputedStyle(document.querySelector(":root")).getPropertyVa
 const ACCENT_2 = getComputedStyle(document.querySelector(":root")).getPropertyValue("--accent-2");
 
 // project
-const CELL_SIZE = 40;
-var walls = {
+const CELL_SIZE = WIDTH / 10;
+const WALLS = {
 
-  top    : 0,
-  left   : 1,
-  bottom : 2,
-  right  : 3
+  TOP    : 0,
+  LEFT   : 1,
+  BOTTOM : 2,
+  RIGHT  : 3
 
 }

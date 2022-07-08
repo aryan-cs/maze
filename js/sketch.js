@@ -5,7 +5,7 @@ function preload() { defaultFont = loadFont("assets/fonts/default.ttf"); }
 
 function setup () {
 
-  frameRate(5);
+  frameRate(30);
 
   createCanvas(WIDTH, HEIGHT);
   canvas = document.getElementById("defaultCanvas0").getContext("2d");
@@ -16,15 +16,7 @@ function setup () {
   maze.rows = floor(HEIGHT / CELL_SIZE);
   maze.columns = floor(WIDTH / CELL_SIZE);
 
-  for (var r = 0; r < maze.rows; r++) {
-
-    for (var c = 0; c < maze.columns; c++) {
-
-      maze.data.push(new Cell(r, c));
-
-    }
-
-  }
+  maze.populate();
 
   currentCell = maze.data[0];
 
@@ -39,8 +31,11 @@ function draw () {
   var next = currentCell.checkNeighbors();
   if (next) {
 
+    next.visited = true;
+
+    maze.removeWalls(currentCell, next);
+
     currentCell = next;
-    currentCell.visited = true;
 
   }
 
